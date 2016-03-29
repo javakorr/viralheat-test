@@ -25,9 +25,10 @@ const postMessageFormView = Backbone.View.extend({
     submitNewPost: function() {
         const self = this;
 
-        const newPostTitle = this.el.querySelector('.newPostTitle').value.trim(),
-            newPostName = this.el.querySelector('.newPostName').value.trim(),
-            newPostMessage = this.el.querySelector('.newPostMessage').value.trim(),
+        const element = self.el,
+            newPostTitle = element.querySelector('.newPostTitle').value.trim(),
+            newPostName = element.querySelector('.newPostName').value.trim(),
+            newPostMessage = element.querySelector('.newPostMessage').value.trim(),
             newPostDate = moment().unix();
 
         if (!newPostTitle || !newPostName || !newPostMessage) {

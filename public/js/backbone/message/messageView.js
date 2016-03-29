@@ -41,12 +41,16 @@ const messageView = Backbone.View.extend({
         this.model.destroy();
     },
     removeMessageView: function() {
-        this.el.parentNode.removeChild(this.el);
+        const element = this.el;
+
+        element.parentNode.removeChild(element);
     },
     showFullMessageDetails: function() {
-        this.$el.find('.delete-message-wrap').addClass('hidden');
-        this.$el.siblings().addClass('hidden');
-        this.$el.find('.message-full-details').removeClass('hidden');
+        const $element = this.$el;
+
+        $element.find('.delete-message-wrap').addClass('hidden');
+        $element.siblings().addClass('hidden');
+        $element.find('.message-full-details').removeClass('hidden');
     }
 });
 

@@ -25,9 +25,10 @@ const postMessageFormView = Backbone.View.extend({
     submitEditedPost: function() {
         const self = this;
 
-        const editedPostTitle = this.el.querySelector('.postTitle').value.trim(),
-            editedPostName = this.el.querySelector('.postName').value.trim(),
-            editedPostMessage = this.el.querySelector('.postMessage').value.trim();
+        const element = self.el,
+            editedPostTitle = element.querySelector('.postTitle').value.trim(),
+            editedPostName = element.querySelector('.postName').value.trim(),
+            editedPostMessage = element.querySelector('.postMessage').value.trim();
 
         if (!editedPostTitle || !editedPostName || !editedPostMessage) {
             alert('Please fill all the fields to edit this post.');
@@ -35,7 +36,7 @@ const postMessageFormView = Backbone.View.extend({
             return false;
         }
 
-        this.options.message.save(
+        self.options.message.save(
             {
                 title: editedPostTitle,
                 name: editedPostName,

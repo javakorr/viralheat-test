@@ -6,8 +6,6 @@ const Backbone = require('backbone'),
 const vent = _.extend({}, Backbone.Events),
     messageListCollection = new MessageListCollection();
 
-messageListCollection.fetch();
-
 const appView = new AppView({ messages: messageListCollection, vent: vent });
 
 document.querySelector('.app').appendChild(appView.el);

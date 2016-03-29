@@ -3,7 +3,10 @@ const Backbone = require('backbone'),
 
 const messageCollection = Backbone.Collection.extend({
     model: messageModel,
-    url: '/messages'
+    url: '/messages',
+    initialize: function() {
+        this.fetch();
+    }
 });
 
 module.exports = messageCollection;

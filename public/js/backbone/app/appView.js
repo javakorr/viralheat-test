@@ -22,12 +22,11 @@ const app = Backbone.View.extend({
         this.render();
     },
     render: function() {
-        const template = Hogan.compile(appTemplate),
-            output = template.render();
+        const template = Hogan.compile(appTemplate);
+
+        this.el.innerHTML = template.render();
 
         const messageListView = new MessageListView({ messages: this.options.messages, vent: this.options.vent });
-        
-        this.el.innerHTML = output;
 
         this.updateDynamicContent(messageListView.$el);
         
