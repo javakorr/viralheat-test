@@ -1,0 +1,33 @@
+<div class="row">
+    <div class="col-xs-12">
+        <h3>Edit a Posting</h3>
+        <hr class="divider">
+    </div>
+</div>
+
+<div class="row">
+    <form>
+        <div class="col-xs-5 columns">
+            <div class="form-group">
+                <label for="postTitle">Title</label>
+                <input type="text" class="postTitle form-control" id="postTitle" value="{{ title }}">
+
+                <label for="postName">Name</label>
+                <input type="text" class="postName form-control" id="postName" value="{{ name }}">
+            </div>
+        </div>
+        <div class="col-xs-7 columns">
+            <div class="form-group">
+                <label for="postMessage">Message</label>
+                <textarea class="postMessage form-control" id="postMessage">{{ message }}</textarea>
+            </div>
+        </div>
+    </form>
+</div>
+
+<div class="row">
+    <div class="col-xs-12">
+        <button class="btn btn-default pull-right submit-edited-post">Submit</button>
+        <button class="btn btn-warning pull-right submit-edited-post">Delete</button>
+    </div>
+</div>

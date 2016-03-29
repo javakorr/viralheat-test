@@ -3,7 +3,8 @@ const Backbone = require('backbone'),
     fs = require('fs'),
     appTemplate = fs.readFileSync(__dirname + '/appTemplate.html', 'utf8'),
     MessageListView = require('./../messageList/messageListView'),
-    PostMessageFormView = require('./../postMessageForm/postMessageFormView');
+    PostMessageFormView = require('./../postMessageForm/postMessageFormView'),
+    EditMessageView = require('./../editMessageForm/editMessageFormView');
 
 const app = Backbone.View.extend({
     tagName: 'div',
@@ -38,6 +39,11 @@ const app = Backbone.View.extend({
         const messageListView = new MessageListView({ messages: this.options.messages });
 
         this.updateDynamicContent(messageListView.$el);
+    },
+    showEditMessage: function() {
+        const editMessageView = new EditMessageView({ model: messageModel });
+
+        this.updateDynamicContent(editMessageView.$el);
     },
     updateDynamicContent: function(newContent) {
         this.$el.find('.dynamic-content').empty().html(newContent);
