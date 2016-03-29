@@ -9,7 +9,8 @@ const messageView = Backbone.View.extend({
     className: 'message gray-layout row',
     events: {
         'click .delete-message': 'deleteMessage',
-        'click .edit-message': 'editMessage'
+        'click .edit-message': 'editMessage',
+        'click .message-details': 'showFullMessageDetails'
     },
     initialize: function(options = {}) {
         this.options = options;
@@ -31,6 +32,11 @@ const messageView = Backbone.View.extend({
     },
     removeMessageView: function() {
         this.el.parentNode.removeChild(this.el);
+    },
+    showFullMessageDetails: function() {
+        this.$el.find('.delete-message-wrap').addClass('hidden');
+        this.$el.siblings().addClass('hidden');
+        this.$el.find('.message-full-details').removeClass('hidden');
     }
 });
 

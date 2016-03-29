@@ -22,7 +22,8 @@
 }
 
 /* Message */
-.edit-message {
+.edit-message,
+.message-details {
     cursor: pointer;
 }
 
@@ -35,15 +36,13 @@
     color: rgb(177, 178, 179);
 }
 
-.edit-message {
+span.edit-message {
     font-size: 25px;
 }
 
 .delete-message {
     font-size: 35px;
 }
-
-/* "Post message" form */
 
 /* Common styles */
 .gray-layout {
