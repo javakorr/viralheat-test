@@ -11,10 +11,9 @@ const messageView = Backbone.View.extend({
         this.render();
     },
     render: function() {
-        const template = Hogan.compile(messageTemplate),
-            output = template.render(this.model.toJSON());
+        const template = Hogan.compile(messageTemplate);
 
-        this.$el.html(output);
+        this.el.innerHTML = template.render(this.model.toJSON());
         
         return this;
     }
