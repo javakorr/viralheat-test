@@ -2,7 +2,6 @@ const Backbone = require('backbone'),
     Hogan = require('hogan'),
     fs = require('fs'),
     appTemplate = fs.readFileSync(__dirname + '/appTemplate.html', 'utf8'),
-    MessageListCollection = require('./../messageList/messageListCollection'),
     MessageListView = require('./../messageList/messageListView'),
     PostMessageFormView = require('./../postMessageForm/postMessageFormView');
 
@@ -13,15 +12,16 @@ const app = Backbone.View.extend({
         'click .show-post-message': 'showPostMessage',
         'click .show-message-list': 'showMessageList'
     },
-    initialize: function() {
-        this.messageListCollection = new MessageListCollection({ title: 'aaa' });
+    initialize: function(options = {}) {
+        this.options = options;
+        this.options['messages'].on('add', this.showMessageList, this);
         this.render();
     },
     render: function() {
         const template = Hogan.compile(appTemplate),
             output = template.render();
 
-        const messageListView = new MessageListView({ messages: this.messageListCollection });
+        const messageListView = new MessageListView({ messages: this.options.messages });
         
         this.el.innerHTML = output;
 
@@ -30,12 +30,12 @@ const app = Backbone.View.extend({
         return this;
     },
     showPostMessage: function() {
-        const postMessageForm = new PostMessageFormView();
+        const postMessageForm = new PostMessageFormView({ messages: this.options.messages });
         
         this.updateDynamicContent(postMessageForm.$el);
     },
     showMessageList: function() {
-        const messageListView = new MessageListView({ messages: this.messageListCollection });
+        const messageListView = new MessageListView({ messages: this.options.messages });
 
         this.updateDynamicContent(messageListView.$el);
     },
