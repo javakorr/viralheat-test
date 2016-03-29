@@ -22,6 +22,7 @@ app.get('/', function(req, res) {
 });
 app.get('/messages', messageRoutes.getMessages);
 app.post('/messages', messageRoutes.createMessage);
+app.patch('/messages/:id', messageRoutes.updateMessage);
 app.delete('/messages/:id', messageRoutes.deleteMessage);
 
 function sendTemplate(req, res, template) {

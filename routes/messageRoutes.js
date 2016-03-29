@@ -26,6 +26,38 @@ exports.createMessage = function(req, res) {
     });
 };
 
+exports.updateMessage = function(req, res) {
+    var updatedMessageId = req.params.id,
+        updatedMessageBody = req.body;
+
+    req.models.message.all(function(error, messages) {
+        if (error) throw error;
+
+        var messageToUpdate = _.find(messages, { id: updatedMessageId });
+
+        if (!_.isUndefined(messageToUpdate)) {
+            if (messageToUpdate.title !== updatedMessageBody.title) {
+                messageToUpdate.title = updatedMessageBody.title;
+            }
+
+            if (messageToUpdate.name !== updatedMessageBody.name) {
+                messageToUpdate.name = updatedMessageBody.name;
+            }
+
+            if (messageToUpdate.message !== updatedMessageBody.message) {
+                messageToUpdate.message = updatedMessageBody.message;
+            }
+
+            messageToUpdate.save(function(error) {
+                if (error) throw error;
+
+                res.send(messageToUpdate);
+                res.end();
+            });
+        }
+    });
+};
+
 exports.deleteMessage = function(req, res) {
     var deletedMessageId = req.params.id;
 

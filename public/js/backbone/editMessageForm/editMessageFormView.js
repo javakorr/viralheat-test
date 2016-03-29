@@ -23,6 +23,8 @@ const postMessageFormView = Backbone.View.extend({
         return this;
     },
     submitEditedPost: function() {
+        const self = this;
+
         const editedPostTitle = this.el.querySelector('.postTitle').value.trim(),
             editedPostName = this.el.querySelector('.postName').value.trim(),
             editedPostMessage = this.el.querySelector('.postMessage').value.trim();
@@ -33,12 +35,19 @@ const postMessageFormView = Backbone.View.extend({
             return false;
         }
 
-        this.options.message.set({
-            title: editedPostTitle,
-            name: editedPostName,
-            message: editedPostMessage
-        });
-        this.options.vent.trigger('app:submitEditedMessage');
+        this.options.message.save(
+            {
+                title: editedPostTitle,
+                name: editedPostName,
+                message: editedPostMessage
+            },
+            {
+                patch: true,
+                success: function(response) {
+                    self.options.vent.trigger('app:submitEditedMessage', response);
+                }
+            }
+        );
     },
     deleteEditedPost: function() {
         this.options.message.destroy();
