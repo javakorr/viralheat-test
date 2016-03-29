@@ -17,6 +17,7 @@ const app = Backbone.View.extend({
         this.options = options;
         this.options.messages.on('add', this.showMessageList, this);
         this.options.vent.bind('app:editMessage', this.showEditMessage, this);
+        this.options.vent.bind('app:deleteEditedMessage', this.showMessageList, this);
         this.render();
     },
     render: function() {
@@ -42,7 +43,7 @@ const app = Backbone.View.extend({
         this.updateDynamicContent(messageListView.$el);
     },
     showEditMessage: function(messageModel) {
-        const editMessageView = new EditMessageView({ model: messageModel });
+        const editMessageView = new EditMessageView({ model: messageModel, vent: this.options.vent });
 
         this.updateDynamicContent(editMessageView.$el);
     },

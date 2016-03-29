@@ -8,7 +8,8 @@ const postMessageFormView = Backbone.View.extend({
     tagName: 'div',
     className: 'edit-message-form gray-layout col-sm-12',
     events: {
-        'click .submit-edited-post': 'submitEditedPost'
+        'click .submit-edited-post': 'submitEditedPost',
+        'click .delete-edited-post': 'deleteEditedPost'
     },
     initialize: function(options = {}) {
         this.options = options;
@@ -33,6 +34,10 @@ const postMessageFormView = Backbone.View.extend({
         }
 
         this.options.messages.add(newMessageModel);
+    },
+    deleteEditedPost: function() {
+        this.options.model.destroy();
+        this.options.vent.trigger('app:deleteEditedMessage');
     }
 });
 
