@@ -1,7 +1,7 @@
 const Backbone = require('backbone');
 
 const messageModel = Backbone.Model.extend({
-    url: '/messages',
+    urlRoot: '/messages',
     defaults: {
         id: null,
         title: null,

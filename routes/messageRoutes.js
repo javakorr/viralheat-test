@@ -1,3 +1,5 @@
+var _ = require('lodash');
+
 exports.getMessages = function(req, res) {
     req.models.message.all(function(error, messages) {
         if (error) throw error;
@@ -20,6 +22,23 @@ exports.createMessage = function(req, res) {
         if (error) throw error;
 
         res.send(messages);
+        res.end();
+    });
+};
+
+exports.deleteMessage = function(req, res) {
+    var deletedMessageId = req.params.id;
+
+    req.models.message.all(function(error, messages) {
+        if (error) throw error;
+
+        var messageToDelete = _.find(messages, { id: deletedMessageId });
+
+        if (!_.isUndefined(messageToDelete)) {
+            messageToDelete.remove();
+        }
+
+        res.sendStatus(200);
         res.end();
     });
 };
