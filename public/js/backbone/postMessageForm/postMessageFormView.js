@@ -23,10 +23,12 @@ const postMessageFormView = Backbone.View.extend({
         return this;
     },
     submitNewPost: function() {
+        const self = this;
+
         const newPostTitle = this.el.querySelector('.newPostTitle').value.trim(),
             newPostName = this.el.querySelector('.newPostName').value.trim(),
             newPostMessage = this.el.querySelector('.newPostMessage').value.trim(),
-            newPostDate = moment().format('MMMM, D YYYY @ h:mm a');
+            newPostDate = moment().unix();
 
         if (!newPostTitle || !newPostName || !newPostMessage) {
             alert('Please fill all the fields to submit a new post.');
@@ -41,7 +43,11 @@ const postMessageFormView = Backbone.View.extend({
             date: newPostDate
         });
 
-        this.options.messages.add(newMessageModel);
+        newMessageModel.save({}, {
+            success: function(response) {
+                self.options.messages.add(response);
+            }
+        });
     }
 });
 

@@ -1,13 +1,27 @@
 var express = require('express'),
-    fs = require('fs');
+    bodyParser = require('body-parser'),
+    fs = require('fs'),
+    orm = require('orm'),
+    messageModel = require('./models/messageModel'),
+    messageRoutes = require('./routes/messageRoutes');
 
 var app = express();
 
 app.use(express.static(__dirname + '/public'));
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
+
+app.use(orm.express('postgres://postgres:admin@localhost:5432/viralheat_db', {
+    define: function(db, models) {
+        models.message = messageModel.load(db)
+    }
+}));
 
 app.get('/', function(req, res) {
     sendTemplate(req, res, 'views/index.html')
 });
+app.get('/messages', messageRoutes.getMessages);
+app.post('/messages', messageRoutes.createMessage);
 
 function sendTemplate(req, res, template) {
     var fileContents = fs.readFileSync(template);
