@@ -5,7 +5,7 @@ const Backbone = require('backbone'),
 
 const messageView = Backbone.View.extend({
     tagName: 'div',
-    className: 'message row',
+    className: 'message gray-layout row',
     events: {},
     initialize: function() {
         this.render();

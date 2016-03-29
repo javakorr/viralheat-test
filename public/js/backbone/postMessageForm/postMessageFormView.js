@@ -5,7 +5,7 @@ const Backbone = require('backbone'),
 
 const postMessageFormView = Backbone.View.extend({
     tagName: 'div',
-    className: 'post-message-form col-sm-12',
+    className: 'post-message-form gray-layout col-sm-12',
     events: {},
     initialize: function() {
         this.render();

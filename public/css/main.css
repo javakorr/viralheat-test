@@ -13,17 +13,15 @@
     color: rgb(255, 255, 255);
 }
 
+.show-post-message:focus {
+    outline: none;
+}
+
 .show-message-list {
     cursor: pointer;
 }
 
 /* Message */
-.message {
-    margin-top: 5px;
-    background-color: rgb(241, 242, 243);
-    border-radius: 5px;
-}
-
 .message-title {
     color: rgb(63, 64, 65);
     font-weight: bold;
@@ -39,4 +37,18 @@
 
 .delete-message {
     font-size: 35px;
+}
+
+/* "Post message" form */
+
+/* Common styles */
+.gray-layout {
+    margin-top: 5px;
+    border-radius: 5px;
+    background-color: rgb(241, 242, 243);
+}
+
+.divider {
+    border: 0;
+    border-bottom: 2px dotted rgb(228, 229, 230);
 }

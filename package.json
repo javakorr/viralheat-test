@@ -11,7 +11,6 @@
     "browserify": "^13.0.0",
     "express": "^4.13.4",
     "hogan": "^1.0.2",
-    "jquery": "^2.2.2",
-    "stringify": "^5.1.0"
+    "jquery": "^2.2.2"
   }
 }
