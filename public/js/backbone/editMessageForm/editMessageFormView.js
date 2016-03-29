@@ -18,7 +18,7 @@ const postMessageFormView = Backbone.View.extend({
     render: function() {
         const template = Hogan.compile(editMessageFormTemplate);
 
-        this.el.innerHTML = template.render(this.options.model.toJSON());
+        this.el.innerHTML = template.render(this.options.message.toJSON());
 
         return this;
     },
@@ -33,10 +33,15 @@ const postMessageFormView = Backbone.View.extend({
             return false;
         }
 
-        this.options.messages.add(newMessageModel);
+        this.options.message.set({
+            title: editedPostTitle,
+            name: editedPostName,
+            message: editedPostMessage
+        });
+        this.options.vent.trigger('app:submitEditedMessage');
     },
     deleteEditedPost: function() {
-        this.options.model.destroy();
+        this.options.message.destroy();
         this.options.vent.trigger('app:deleteEditedMessage');
     }
 });
