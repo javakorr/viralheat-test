@@ -6,8 +6,11 @@ const Backbone = require('backbone'),
 const messageView = Backbone.View.extend({
     tagName: 'div',
     className: 'message gray-layout row',
-    events: {},
+    events: {
+        'click .delete-message': 'deleteMessage'
+    },
     initialize: function() {
+        this.model.on('destroy', this.removeMessageView, this);
         this.render();
     },
     render: function() {
@@ -16,6 +19,12 @@ const messageView = Backbone.View.extend({
         this.el.innerHTML = template.render(this.model.toJSON());
         
         return this;
+    },
+    deleteMessage: function() {
+        this.model.destroy();
+    },
+    removeMessageView: function() {
+        this.el.parentNode.removeChild(this.el);
     }
 });
 
