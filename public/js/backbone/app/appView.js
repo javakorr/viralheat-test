@@ -15,14 +15,15 @@ const app = Backbone.View.extend({
     },
     initialize: function(options = {}) {
         this.options = options;
-        this.options['messages'].on('add', this.showMessageList, this);
+        this.options.messages.on('add', this.showMessageList, this);
+        this.options.vent.bind('app:editMessage', this.showEditMessage, this);
         this.render();
     },
     render: function() {
         const template = Hogan.compile(appTemplate),
             output = template.render();
 
-        const messageListView = new MessageListView({ messages: this.options.messages });
+        const messageListView = new MessageListView({ messages: this.options.messages, vent: this.options.vent });
         
         this.el.innerHTML = output;
 
@@ -36,11 +37,11 @@ const app = Backbone.View.extend({
         this.updateDynamicContent(postMessageForm.$el);
     },
     showMessageList: function() {
-        const messageListView = new MessageListView({ messages: this.options.messages });
+        const messageListView = new MessageListView({ messages: this.options.messages, vent: this.options.vent });
 
         this.updateDynamicContent(messageListView.$el);
     },
-    showEditMessage: function() {
+    showEditMessage: function(messageModel) {
         const editMessageView = new EditMessageView({ model: messageModel });
 
         this.updateDynamicContent(editMessageView.$el);

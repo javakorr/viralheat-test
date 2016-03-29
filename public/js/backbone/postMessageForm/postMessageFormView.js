@@ -41,7 +41,7 @@ const postMessageFormView = Backbone.View.extend({
             date: newPostDate
         });
 
-        this.options['messages'].add(newMessageModel);
+        this.options.messages.add(newMessageModel);
     }
 });
 

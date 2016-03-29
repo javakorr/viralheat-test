@@ -11,7 +11,8 @@ const messageView = Backbone.View.extend({
         'click .delete-message': 'deleteMessage',
         'click .edit-message': 'editMessage'
     },
-    initialize: function() {
+    initialize: function(options = {}) {
+        this.options = options;
         this.model.on('destroy', this.removeMessageView, this);
         this.render();
     },
@@ -23,7 +24,7 @@ const messageView = Backbone.View.extend({
         return this;
     },
     editMessage: function() {
-        console.log(this);
+        this.options.vent.trigger('app:editMessage', this.model);
     },
     deleteMessage: function() {
         this.model.destroy();

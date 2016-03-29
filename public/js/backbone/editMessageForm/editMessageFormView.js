@@ -17,22 +17,22 @@ const postMessageFormView = Backbone.View.extend({
     render: function() {
         const template = Hogan.compile(editMessageFormTemplate);
 
-        this.el.innerHTML = template.render(this.options['model'].toJSON());
+        this.el.innerHTML = template.render(this.options.model.toJSON());
 
         return this;
     },
     submitEditedPost: function() {
-        const newPostTitle = this.el.querySelector('.newPostTitle').value.trim(),
-            newPostName = this.el.querySelector('.newPostName').value.trim(),
-            newPostMessage = this.el.querySelector('.newPostMessage').value.trim();
+        const editedPostTitle = this.el.querySelector('.postTitle').value.trim(),
+            editedPostName = this.el.querySelector('.postName').value.trim(),
+            editedPostMessage = this.el.querySelector('.postMessage').value.trim();
 
-        if (!newPostTitle || !newPostName || !newPostMessage) {
+        if (!editedPostTitle || !editedPostName || !editedPostMessage) {
             alert('Please fill all the fields to edit this post.');
 
             return false;
         }
 
-        this.options['messages'].add(newMessageModel);
+        this.options.messages.add(newMessageModel);
     }
 });
 
