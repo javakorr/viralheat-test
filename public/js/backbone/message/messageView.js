@@ -1,6 +1,7 @@
 const Backbone = require('backbone'),
     Hogan = require('hogan'),
     moment = require('moment'),
+    _ = require('lodash'),
     appView = require('./../app/appView'),
     fs = require('fs'),
     messageTemplate = fs.readFileSync(__dirname + '/messageTemplate.html', 'utf8');
@@ -16,13 +17,18 @@ const messageView = Backbone.View.extend({
     initialize: function(options = {}) {
         this.options = options;
         this.model.on('destroy', this.removeMessageView, this);
+
+        const messageDate = this.model.get('date');
+
+        if (!_.isString(messageDate)) {
+            const formatedMessageDate = moment.unix(messageDate).format('MMMM, D YYYY @ h:mm a');
+            this.model.set('date', formatedMessageDate);
+        }
+
         this.render();
     },
     render: function() {
         const template = Hogan.compile(messageTemplate);
-
-        const formatedMessageDate = moment.unix(this.model.get('date')).format('MMMM, D YYYY @ h:mm a');
-        this.model.set('date', formatedMessageDate);
 
         this.el.innerHTML = template.render(this.model.toJSON());
         
