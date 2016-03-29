@@ -7,6 +7,7 @@ const Backbone = require('backbone'),
 
 const app = Backbone.View.extend({
     tagName: 'div',
+    className: 'container',
     initialize: function() {
         this.render();
     },
