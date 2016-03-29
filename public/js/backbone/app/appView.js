@@ -10,17 +10,18 @@ const app = Backbone.View.extend({
     tagName: 'div',
     className: 'container',
     events: {
-        'click .show-post-message': 'showPostMessage'
+        'click .show-post-message': 'showPostMessage',
+        'click .show-message-list': 'showMessageList'
     },
     initialize: function() {
+        this.messageListCollection = new MessageListCollection({ title: 'aaa' });
         this.render();
     },
     render: function() {
         const template = Hogan.compile(appTemplate),
             output = template.render();
 
-        const messageListCollection = new MessageListCollection({ title: 'aaa' }),
-            messageListView = new MessageListView({ messages: messageListCollection });
+        const messageListView = new MessageListView({ messages: this.messageListCollection });
         
         this.el.innerHTML = output;
 
@@ -32,6 +33,11 @@ const app = Backbone.View.extend({
         const postMessageForm = new PostMessageFormView();
         
         this.updateDynamicContent(postMessageForm.$el);
+    },
+    showMessageList: function() {
+        const messageListView = new MessageListView({ messages: this.messageListCollection });
+
+        this.updateDynamicContent(messageListView.$el);
     },
     updateDynamicContent: function(newContent) {
         this.$el.find('.dynamic-content').empty().html(newContent);
