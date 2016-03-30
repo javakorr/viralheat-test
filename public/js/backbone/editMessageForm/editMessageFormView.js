@@ -12,7 +12,7 @@ const postMessageFormView = Backbone.View.extend({
         'click .delete-edited-post': 'deleteEditedPost'
     },
     initialize: function() {
-        this.options = options || {};
+        this.options = this.options || {};
         this.render();
     },
     render: function() {
