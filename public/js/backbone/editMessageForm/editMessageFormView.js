@@ -11,8 +11,8 @@ const postMessageFormView = Backbone.View.extend({
         'click .submit-edited-post': 'submitEditedPost',
         'click .delete-edited-post': 'deleteEditedPost'
     },
-    initialize: function(options = {}) {
-        this.options = options;
+    initialize: function() {
+        this.options = options || {};
         this.render();
     },
     render: function() {

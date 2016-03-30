@@ -13,8 +13,8 @@ const app = Backbone.View.extend({
         'click .show-post-message': 'showPostMessage',
         'click .show-message-list': 'showMessageList'
     },
-    initialize: function(options = {}) {
-        this.options = options;
+    initialize: function() {
+        this.options = options || {};
         this.options.messages.on('add', this.showMessageList, this);
         this.options.vent.bind('app:editMessage', this.showEditMessage, this);
         this.options.vent.bind('app:deleteEditedMessage', this.showMessageList, this);

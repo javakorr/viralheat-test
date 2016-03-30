@@ -4,8 +4,8 @@ const Backbone = require('backbone'),
 const messageListView = Backbone.View.extend({
     tagName: 'div',
     className: 'message-list col-sm-12',
-    initialize: function(options = {}) {
-        this.options = options;
+    initialize: function() {
+        this.options = options || {};
         this.render();
     },
     render: function() {

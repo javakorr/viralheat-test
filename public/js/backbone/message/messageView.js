@@ -14,8 +14,8 @@ const messageView = Backbone.View.extend({
         'click .edit-message': 'editMessage',
         'click .message-details': 'showFullMessageDetails'
     },
-    initialize: function(options = {}) {
-        this.options = options;
+    initialize: function() {
+        this.options = options || {};
         this.model.on('destroy', this.removeMessageView, this);
 
         const messageDate = this.model.get('date');
