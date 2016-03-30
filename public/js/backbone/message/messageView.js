@@ -18,19 +18,15 @@ const messageView = Backbone.View.extend({
         this.options = options || {};
         this.model.on('destroy', this.removeMessageView, this);
 
-        const messageDate = this.model.get('date');
-
-        if (!_.isString(messageDate)) {
-            const formatedMessageDate = moment.unix(messageDate).format('MMMM, D YYYY @ h:mm a');
-            this.model.set('date', formatedMessageDate);
-        }
-
         this.render();
     },
     render: function() {
-        const template = Hogan.compile(messageTemplate);
+        const template = Hogan.compile(messageTemplate),
+            modelJSON = this.model.toJSON();
 
-        this.el.innerHTML = template.render(this.model.toJSON());
+        modelJSON.formattedDate = moment.unix(this.model.get('date')).format('MMMM, D YYYY @ h:mm a');
+
+        this.el.innerHTML = template.render(modelJSON);
         
         return this;
     },

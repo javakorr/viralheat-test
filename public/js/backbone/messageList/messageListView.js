@@ -10,7 +10,7 @@ const messageListView = Backbone.View.extend({
     },
     render: function() {
         this.options.messages.each(function(messageModel) {
-            let newMessageView = new MessageView({ model: messageModel, vent: this.options.vent });
+            const newMessageView = new MessageView({ model: messageModel, vent: this.options.vent });
 
             this.el.appendChild(newMessageView.el);
         }, this);
