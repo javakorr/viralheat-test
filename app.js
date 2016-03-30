@@ -11,7 +11,7 @@ app.use(express.static(__dirname + '/public'));
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
-app.use(orm.express('postgres://postgres:admin@localhost:5432/viralheat_db', {
+app.use(orm.express(process.env.DATABASE_URL, {
     define: function(db, models) {
         models.message = messageModel.load(db)
     }
