@@ -11,8 +11,8 @@ const postMessageFormView = Backbone.View.extend({
     events: {
         'click .submit-new-post': 'submitNewPost'
     },
-    initialize: function() {
-        this.options = this.options || {};
+    initialize: function(options) {
+        this.options = options || {};
         this.render();
     },
     render: function() {
