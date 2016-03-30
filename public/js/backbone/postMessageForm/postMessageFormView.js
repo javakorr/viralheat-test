@@ -1,5 +1,5 @@
 const Backbone = require('backbone'),
-    Hogan = require('hogan'),
+    Hogan = require('hogan.js'),
     moment = require('moment'),
     MessageModel = require('./../message/messageModel'),
     fs = require('fs'),

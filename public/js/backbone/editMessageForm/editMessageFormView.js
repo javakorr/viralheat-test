@@ -1,5 +1,5 @@
 const Backbone = require('backbone'),
-    Hogan = require('hogan'),
+    Hogan = require('hogan.js'),
     moment = require('moment'),
     fs = require('fs'),
     editMessageFormTemplate = fs.readFileSync(__dirname + '/editMessageFormTemplate.html', 'utf8');

@@ -1,5 +1,5 @@
 const Backbone = require('backbone'),
-    Hogan = require('hogan'),
+    Hogan = require('hogan.js'),
     fs = require('fs'),
     appTemplate = fs.readFileSync(__dirname + '/appTemplate.html', 'utf8'),
     MessageListView = require('./../messageList/messageListView'),
